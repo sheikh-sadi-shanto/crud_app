@@ -1,0 +1,30 @@
+<html lang="en">
+    {% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css.css' %}">
+    <title>my app</title>
+</head>
+<body>
+    <h1 class="text-primary">download your favourite app </h1>
+    {% for i in app %}
+    <div class="card d-lg-inline-block text-center m-auto" style="width: 18rem;">
+        <img class="card-img-top " src="{{i.pic.url}}" width="100" alt="ok">
+        <p class="card-text text-center text-primary">    {{i.name}}</p>
+        <div class="card-body text-center">
+          <a  href="" download="{{i.file}}">download</a>
+        </div>
+      </div>
+    
+
+    
+    {% endfor %}
+
+
+
+
+    
+      <script src="{% static 'js.js' %}"></script>
+</body>
+</html>

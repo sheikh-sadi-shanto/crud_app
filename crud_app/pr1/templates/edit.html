@@ -1,0 +1,46 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block title %}<title>edit</title>{% endblock %}
+
+
+{% block crud %}
+<hr>
+{% for ii in aa %}
+<form class="text-center" action="" method="POST">
+    {% csrf_token %}
+    <div class="m-auto w-25">
+      <label  class="form-label">First name</label>
+      <input type="text" name="fname" value="{{ii.fname}}" class="form-control" >
+    </div>
+    <div class="m-auto w-25">
+      <label  class="form-label">Last name </label>
+      <input type="text" name="lname" value="{{ii.lname}}" class="form-control" >
+    </div>
+    <div class="m-auto w-25">
+      <label  class="form-label">Age </label>
+      <input type="number" name="age" value="{{ii.age}}" class="form-control" >
+    </div><br>
+    <div class="form m-auto w-25">
+      <select name="gender"  class="form-select">
+        {% if ii.gender == 'male' %}
+        <option class="text-primary" value="male">Male</option>
+        <option class="text-primary" value="female">Female</option>
+        {% else %}
+        <option class="text-primary" value="female">Female</option>
+        <option class="text-primary" value="male">Male</option>
+        {% endif %}
+      </select>
+  </div>
+    <div class="m-auto w-25">
+      <label for="exampleInputEmail1" class="form-label">Email address</label>
+      <input type="email" name="email" class="form-control" value="{{ii.email}}"  aria-describedby="emailHelp">
+    </div>
+      <div class="img">
+        {% if ii.pic %}
+        <img src="{{ii.pic.url}}" width="240" alt="">
+        {% endif %}
+      </div><br>
+      <input type="submit" class="text-primary" value="submit">
+  </form>
+  {% endfor %}
+{% endblock %} 

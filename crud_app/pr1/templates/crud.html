@@ -1,0 +1,107 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block title %}<title>crud</title>{% endblock %}
+{% block style %} <style>table,td,th{border: 2px solid black;}</style> {% endblock %}
+
+{% block crud %}
+<!-- Button trigger modal -->
+<div class="text-center">
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exam">
+  ADD PERSON
+</button>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="exam" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      
+      <div class="modal-header">
+        <h5 class="modal-title" id="exam">personal detalis</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+<form action="" method="POST" enctype="multipart/form-data">
+  {% csrf_token %}
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">First name </label>
+    <input type="text" name="fname" class="form-control" placeholder="your first name" >
+  </div>
+  <div class="mb-3">
+    <label  class="form-label">Last name </label>
+    <input type="text" name="lname" class="form-control" placeholder="your last name">
+  </div>
+  <div>
+    <label  class="form-label">Age </label>
+    <input type="number" name="age" class="form-control" placeholder="your age">
+  </div><br>
+  <div class="form">
+    <label  class="form-label">Gender </label>
+    <select name="gender" class="form-select">
+      <option selected disabled>choose</option>
+      <option class="text-primary" value="male">Male</option>
+      <option class="text-primary" value="female">Female</option>
+    </select>
+</div><br>
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Email address</label>
+    <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+  </div>
+    <div class="file-field">
+      <div class="btn btn-primary btn-sm float-left">
+        <span>Choose file</span>
+        <input type="file" name="file">
+      </div>
+       
+    </div>
+
+
+
+
+        <div class="modal-footer">
+          <input type="submit" class="btn btn-success" value="submit">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>      
+        </div>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
+
+
+    <div class="a1 m-auto">
+  
+    <table class="table text-center  w-75 m-auto">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Handle</th>
+            <th scope="col">Actoin</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="row-1">{% for i in all %}
+            <th class="col">{{forloop.counter}}</th>
+            <td class="col-3 ">{{i.fname}}</td>
+            <td class="col-3">{{i.lname}}</td>
+            <td class="col-3">{{i.email}}</td>
+            <td style="border: none;" class="col-3 ">
+              
+              <form action="{% url 'delete' i.id %}" method="POST">
+                {% csrf_token %}           
+  <a class="text-white" href="{% url 'edit' i.id %}"><button type="button" class="btn btn-primary " >edit</button></a>
+  
+<button type="submit" class="btn btn-danger text-white">delete</button>
+</form>
+              </td>
+          </tr>
+          
+          {% endfor %}
+        </tbody>
+      </table>
+      <img src="{% static 'image/r.jpg' %}" width="300" alt="ok">
+    </div>
+
+{% endblock %} 
